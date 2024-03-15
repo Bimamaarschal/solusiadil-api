@@ -1,20 +1,17 @@
 const express = require('express');
-const firebaseAdmin = require('./firebaseConfig');
-
+const bookRoutes = require('./src/routes/bookRoutes');
 const app = express();
 
-app.get('/', (req, res) => {
-    firebaseAdmin.database().ref('path/to/data').once('value')
-        .then(snapshot => {
-            const data = snapshot.val();
-            res.json(data);
-        })
-        .catch(error => {
-            res.status(500).json({ error: error.message });
-        });
+app.use(express.json());
+
+app.use('/books', bookRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!' });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

@@ -1,12 +1,16 @@
 const express = require('express');
 const userRoutes = require('./src/routes/userRoutes');
 const blogRoutes = require('./src/routes/blogRoutes');
+const undangundangRoutes = require('./src/routes/undangundangRoutes');
+const adminRoutes = require('./src/routes/adminRoutes');
 const app = express();
 
 app.use(express.json());
 
 app.use('/users', userRoutes);
 app.use('/blogs', blogRoutes);
+app.use('/undangundang', undangundangRoutes);
+app.use('/admin', adminRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

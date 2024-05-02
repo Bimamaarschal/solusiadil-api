@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const userRoutes = require('./src/routes/userRoutes');
 const blogRoutes = require('./src/routes/blogRoutes');
 const undangundangRoutes = require('./src/routes/undangundangRoutes');
@@ -9,6 +10,7 @@ const konsultasiRoutes = require('./src/routes/konsultasiRoutes');
 const apphRoutes = require('./src/routes/apphRoutes');
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/users', userRoutes);

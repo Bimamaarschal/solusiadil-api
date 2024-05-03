@@ -1,9 +1,8 @@
 {
     "version": 2,
-    "builds": [
-      {
-        "src": "app.js",
-        "use": "@vercel/node"
-      }
-    ]
+    "engines": {
+      "node": "18.16.1"
+    },
+    "app": "app.js",
+    "routes": ["/"]
   }

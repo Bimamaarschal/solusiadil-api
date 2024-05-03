@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const userRoutes = require('../src/routes/userRoutes');
-const blogRoutes = require('../src/routes/blogRoutes');
-const undangundangRoutes = require('../src/routes/undangundangRoutes');
-const adminRoutes = require('../src/routes/adminRoutes');
-const panduanRoutes = require('../src/routes/panduanRoutes');
-const laiRoutes = require('../src/routes/laiRoutes');
-const konsultasiRoutes = require('../src/routes/konsultasiRoutes');
-const apphRoutes = require('../src/routes/apphRoutes');
+const userRoutes = require('./src/routes/userRoutes');
+const blogRoutes = require('./src/routes/blogRoutes');
+const undangundangRoutes = require('./src/routes/undangundangRoutes');
+const adminRoutes = require('./src/routes/adminRoutes');
+const panduanRoutes = require('./src/routes/panduanRoutes');
+const laiRoutes = require('./src/routes/laiRoutes');
+const konsultasiRoutes = require('./src/routes/konsultasiRoutes');
+const apphRoutes = require('./src/routes/apphRoutes');
 const app = express();
 
 app.use(cors());

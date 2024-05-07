@@ -32,16 +32,18 @@ const getPengguna = async (req, res, next) => {
 const getPenggunaNik = async (req, res, next) => {
   try {
     const userNik = req.params.nik;
-    const user = await userModel.getPenggunaByNik(userNik);
-    if (!user) {
+    const snapshot = await usersRef.orderByChild('nik').equalTo(userNik).once('value');
+    if (!snapshot.exists()) {
       res.status(404).json({ message: 'Data Tidak Tersedia' });
     } else {
-      res.status(200).json(user);
+      const userData = Object.values(snapshot.val())[0];
+      res.status(200).json(userData);
     }
   } catch (error) {
     next(error);
   }
 };
+
 
 const getAllPenggunas = async (req, res, next) => {
   try {

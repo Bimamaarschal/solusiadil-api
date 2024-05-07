@@ -8,5 +8,6 @@ router.get('/', userController.getAllPenggunas);
 router.put('/:id', userController.updatePengguna);
 router.delete('/:id', userController.deletePengguna);
 router.get('/nik/:nik', userController.getPenggunaByNIK);
+router.post('/login', userController.loginPengguna);
 
 module.exports = router;

@@ -58,11 +58,33 @@ const getPenggunaByNIK = async (nik) => {
   }
 };
 
+const loginPengguna = async (nik, password) => {
+  try {
+    const snapshot = await usersRef.orderByChild('nik').equalTo(nik).once('value');
+    const userData = snapshot.val();
+    
+    if (!userData) {
+      throw new Error('User not found');
+    }
+
+    // Lakukan pengecekan password di sini
+    const user = Object.values(userData)[0]; // Ambil data user pertama yang sesuai dengan NIK
+    if (user.password !== password) {
+      throw new Error('Invalid password');
+    }
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addPengguna,
   getPenggunaById,
   getAllPenggunas,
   updatePengguna,
   deletePengguna,
-  getPenggunaByNIK
+  getPenggunaByNIK,
+  loginPengguna
 };

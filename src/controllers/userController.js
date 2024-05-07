@@ -75,11 +75,26 @@ const getPenggunaByNIK = async (req, res, next) => {
   }
 };
 
+const loginPengguna = async (req, res, next) => {
+  try {
+    const { nik, password } = req.body;
+    if (!nik || !password) {
+      return res.status(400).json({ message: 'NIK and password are required' });
+    }
+    const userData = await userModel.loginPengguna(nik, password);
+    res.status(200).json({ message: 'Login successful', userData });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   createPengguna,
   getPengguna,
   getAllPenggunas,
   updatePengguna,
   deletePengguna,
-  getPenggunaByNIK
+  getPenggunaByNIK,
+  loginPengguna
 };

@@ -29,6 +29,20 @@ const getPengguna = async (req, res, next) => {
   }
 };
 
+const getPenggunas = async (req, res, next) => {
+  try {
+    const nik = req.params.nik;
+    const user = await userModel.getPenggunaById(nik);
+    if (!user) {
+      res.status(404).json({ message: 'Data Tidak Tersedia' });
+    } else {
+      res.status(200).json(user);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getAllPenggunas = async (req, res, next) => {
   try {
     const users = await userModel.getAllPenggunas();
@@ -62,6 +76,7 @@ const deletePengguna = async (req, res, next) => {
 module.exports = {
   createPengguna,
   getPengguna,
+  getPenggunas,
   getAllPenggunas,
   updatePengguna,
   deletePengguna

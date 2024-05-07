@@ -22,15 +22,6 @@ const getPenggunaById = async (userId) => {
   }
 };
 
-const getPenggunaByNik = async (userId) => {
-  try {
-    const snapshot = await usersRef.child(userId).once('value');
-    return snapshot.val();
-  } catch (error) {
-    throw error;
-  }
-};
-
 const getAllPenggunas = async () => {
   try {
     const snapshot = await usersRef.once('value');
@@ -58,11 +49,20 @@ const deletePengguna = async (userId) => {
   }
 };
 
+const getPenggunaByNIK = async (nik) => {
+  try {
+    const snapshot = await usersRef.orderByChild('nik').equalTo(nik).once('value');
+    return snapshot.val();
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addPengguna,
   getPenggunaById,
-  getPenggunaByNik,
   getAllPenggunas,
   updatePengguna,
-  deletePengguna
+  deletePengguna,
+  getPenggunaByNIK
 };

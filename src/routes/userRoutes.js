@@ -4,9 +4,9 @@ const userController = require('../controllers/userController');
 
 router.post('/', userController.createPengguna);
 router.get('/:id', userController.getPengguna);
-router.get('/nik/:id', userController.getPenggunaNik);
 router.get('/', userController.getAllPenggunas);
 router.put('/:id', userController.updatePengguna);
 router.delete('/:id', userController.deletePengguna);
+router.get('/nik/:nik', userController.getPenggunaByNIK);
 
 module.exports = router;

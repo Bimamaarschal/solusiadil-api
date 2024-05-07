@@ -29,22 +29,6 @@ const getPengguna = async (req, res, next) => {
   }
 };
 
-const getPenggunaNik = async (req, res, next) => {
-  try {
-    const userNik = req.params.nik;
-    const snapshot = await usersRef.orderByChild('nik').equalTo(userNik).once('value');
-    if (!snapshot.exists()) {
-      res.status(404).json({ message: 'Data Tidak Tersedia' });
-    } else {
-      const userData = Object.values(snapshot.val())[0];
-      res.status(200).json(userData);
-    }
-  } catch (error) {
-    next(error);
-  }
-};
-
-
 const getAllPenggunas = async (req, res, next) => {
   try {
     const users = await userModel.getAllPenggunas();
@@ -75,11 +59,27 @@ const deletePengguna = async (req, res, next) => {
   }
 };
 
+const getPenggunaByNIK = async (req, res, next) => {
+  try {
+    const { nik } = req.params;
+    if (!nik) {
+      return res.status(400).json({ message: 'NIK parameter is required' });
+    }
+    const userData = await userModel.getPenggunaByNIK(nik);
+    if (!userData) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(userData);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createPengguna,
   getPengguna,
-  getPenggunaNik,
   getAllPenggunas,
   updatePengguna,
-  deletePengguna
+  deletePengguna,
+  getPenggunaByNIK
 };

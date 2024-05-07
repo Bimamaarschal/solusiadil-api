@@ -29,10 +29,10 @@ const getPengguna = async (req, res, next) => {
   }
 };
 
-const getPenggunas = async (req, res, next) => {
+const getPenggunaNik = async (req, res, next) => {
   try {
-    const nik = req.params.nik;
-    const user = await userModel.getPenggunaById(nik);
+    const userNik = req.params.nik;
+    const user = await userModel.getPenggunaByNik(userNik);
     if (!user) {
       res.status(404).json({ message: 'Data Tidak Tersedia' });
     } else {
@@ -76,7 +76,7 @@ const deletePengguna = async (req, res, next) => {
 module.exports = {
   createPengguna,
   getPengguna,
-  getPenggunas,
+  getPenggunaNik,
   getAllPenggunas,
   updatePengguna,
   deletePengguna

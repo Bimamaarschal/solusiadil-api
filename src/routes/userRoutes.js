@@ -4,7 +4,7 @@ const userController = require('../controllers/userController');
 
 router.post('/', userController.createPengguna);
 router.get('/:id', userController.getPengguna);
-router.get('/:nik', userController.getPenggunas);
+router.get('/nik/:nik', userController.getPenggunas);
 router.get('/', userController.getAllPenggunas);
 router.put('/:id', userController.updatePengguna);
 router.delete('/:id', userController.deletePengguna);

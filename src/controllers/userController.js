@@ -82,11 +82,16 @@ const loginPengguna = async (req, res, next) => {
       return res.status(400).json({ message: 'NIK and password are required' });
     }
     const userData = await userModel.loginPengguna(nik, password);
+    if (!userData) {
+      return res.status(401).json({ message: 'Invalid NIK or password' });
+    }
+    // Jika login berhasil, kirim data pengguna
     res.status(200).json({ message: 'Login successful', userData });
   } catch (error) {
     next(error);
   }
 };
+
 
 
 module.exports = {

@@ -8,6 +8,6 @@ router.get('/:id', userController.getPengguna);
 router.get('/', userController.getAllPenggunas);
 router.put('/:id', userController.updatePengguna);
 router.delete('/:id', userController.deletePengguna);
-router.get('/nik/:nik', userController.getPenggunaByNIK);
+router.get('/idmasyarakat/:id_masyarakat', userController.getPenggunaByNIK);
 
 module.exports = router;

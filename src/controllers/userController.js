@@ -61,11 +61,11 @@ const deletePengguna = async (req, res, next) => {
 
 const getPenggunaByNIK = async (req, res, next) => {
   try {
-    const { id_masyarakat } = req.params;
-    if (!id_masyarakat) {
-      return res.status(400).json({ message: 'id_masyarakat parameter is required' });
+    const { nik } = req.params;
+    if (!nik) {
+      return res.status(400).json({ message: 'NIK parameter is required' });
     }
-    const userData = await userModel.getPenggunaByNIK(id_masyarakat);
+    const userData = await userModel.getPenggunaByNIK(nik);
     if (!userData) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -77,13 +77,13 @@ const getPenggunaByNIK = async (req, res, next) => {
 
 const loginPengguna = async (req, res, next) => {
   try {
-    const { id_masyarakat, password } = req.body;
-    if (!id_masyarakat || !password) {
-      return res.status(400).json({ message: 'id_masyarakat and password are required' });
+    const { nik, password } = req.body;
+    if (!nik || !password) {
+      return res.status(400).json({ message: 'NIK and password are required' });
     }
-    const userData = await userModel.loginPengguna(id_masyarakat, password);
+    const userData = await userModel.loginPengguna(nik, password);
     if (!userData) {
-      return res.status(401).json({ message: 'Invalid id_masyarakat or password' });
+      return res.status(401).json({ message: 'Invalid NIK or password' });
     }
     // Jika login berhasil, kirim data pengguna
     res.status(200).json({ message: 'Login successful', userData });

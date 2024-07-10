@@ -75,11 +75,28 @@ const getKonsulByNIK = async (req, res, next) => {
   }
 };
 
+const getKonsulByIDK = async (req, res, next) => {
+  try {
+    const { id_konsultasi } = req.params;
+    if (!id_konsultasi) {
+      return res.status(400).json({ message: 'id_konsultasi parameter is required' });
+    }
+    const konsultasiData = await konsultasiModel.getKonsulByIDK(id_konsultasi);
+    if (!konsultasiData) {
+      return res.status(404).json({ message: 'konsultasiData not found' });
+    }
+    res.status(200).json(konsultasiData);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 module.exports = {
   createKonsul,
   getKonsul,
   getKonsulByNIK,
+  getKonsulByIDK,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

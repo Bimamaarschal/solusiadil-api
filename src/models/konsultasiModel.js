@@ -59,10 +59,21 @@ const getKonsulByNIK = async (id_masyarakat) => {
   }
 };
 
+const getKonsulByIDK = async (id_konsultasi) => {
+  try {
+    console.log("id_konsultasi:", id_konsultasi);
+    const snapshot = await konsultasisRef.orderByChild('id_konsultasi').equalTo(id_konsultasi).once('value');
+    return snapshot.val();
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addKonsul,
   getKonsulById,
   getKonsulByNIK,
+  getKonsulByIDK,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

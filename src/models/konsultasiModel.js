@@ -49,8 +49,9 @@ const deleteKonsul = async (konsultasiId) => {
   }
 };
 
-const getKonsulByNIK = async () => {
+const getKonsulByNIK = async (id_masyarakat) => {
   try {
+    console.log("id_masyarakat:", id_masyarakat); // Debugging log
     const snapshot = await konsultasisRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
     return snapshot.val();
   } catch (error) {

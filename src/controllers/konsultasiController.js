@@ -59,9 +59,25 @@ const deleteKonsul = async (req, res, next) => {
   }
 };
 
+const getMasy = async (req, res, next) => {
+  try {
+    const konsultasiId = req.params.id_masyarakat;
+    const konsultasi = await konsultasiModel.getMasyById(konsultasiId);
+    if (!konsultasi) {
+      res.status(404).json({ message: 'Data Tidak Tersedia' });
+    } else {
+      res.status(200).json(konsultasi);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   createKonsul,
   getKonsul,
+  getMasy,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

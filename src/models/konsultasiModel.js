@@ -49,9 +49,19 @@ const deleteKonsul = async (konsultasiId) => {
   }
 };
 
+const getMasyById = async () => {
+  try {
+    const snapshot = await usersRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
+    return snapshot.val();
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addKonsul,
   getKonsulById,
+  getMasyById,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

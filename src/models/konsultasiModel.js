@@ -51,7 +51,7 @@ const deleteKonsul = async (konsultasiId) => {
 
 const getKonsulByNIK = async () => {
   try {
-    const snapshot = await usersRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
+    const snapshot = await konsultasisRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
     return snapshot.val();
   } catch (error) {
     throw error;

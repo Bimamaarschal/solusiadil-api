@@ -65,11 +65,11 @@ const getKonsulByNIK = async (req, res, next) => {
     if (!id_masyarakat) {
       return res.status(400).json({ message: 'id_masyarakat parameter is required' });
     }
-    const userData = await userModel.getKonsulByNIK(id_masyarakat);
-    if (!userData) {
-      return res.status(404).json({ message: 'User not found' });
+    const konsultasiData = await konsultasiModel.getKonsulByNIK(id_masyarakat);
+    if (!konsultasiData) {
+      return res.status(404).json({ message: 'konsultasiData not found' });
     }
-    res.status(200).json(userData);
+    res.status(200).json(konsultasiData);
   } catch (error) {
     next(error);
   }

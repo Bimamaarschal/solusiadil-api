@@ -49,7 +49,7 @@ const deleteKonsul = async (konsultasiId) => {
   }
 };
 
-const getMasyById = async () => {
+const getKonsulByNIK = async () => {
   try {
     const snapshot = await usersRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
     return snapshot.val();
@@ -61,7 +61,7 @@ const getMasyById = async () => {
 module.exports = {
   addKonsul,
   getKonsulById,
-  getMasyById,
+  getKonsulByNIK,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

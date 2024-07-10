@@ -7,6 +7,6 @@ router.get('/:id', konsultasiController.getKonsul);
 router.get('/', konsultasiController.getAllKonsuls);
 router.put('/:id', konsultasiController.updateKonsul);
 router.delete('/:id', konsultasiController.deleteKonsul);
-router.get('/idmasyarakat/:id_masyarakat', konsultasiController.getMasy);
+router.get('/idmasyarakat/:id_masyarakat', konsultasiController.getKonsulByNIK);
 
 module.exports = router;

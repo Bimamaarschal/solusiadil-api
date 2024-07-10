@@ -59,15 +59,17 @@ const deleteKonsul = async (req, res, next) => {
   }
 };
 
-const getMasy = async (req, res, next) => {
+const getKonsulByNIK = async (req, res, next) => {
   try {
-    const konsultasiId = req.params.id_masyarakat;
-    const konsultasi = await konsultasiModel.getMasyById(konsultasiId);
-    if (!konsultasi) {
-      res.status(404).json({ message: 'Data Tidak Tersedia' });
-    } else {
-      res.status(200).json(konsultasi);
+    const { id_masyarakat } = req.params;
+    if (!id_masyarakat) {
+      return res.status(400).json({ message: 'id_masyarakat parameter is required' });
     }
+    const userData = await userModel.getKonsulByNIK(id_masyarakat);
+    if (!userData) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(userData);
   } catch (error) {
     next(error);
   }
@@ -77,7 +79,7 @@ const getMasy = async (req, res, next) => {
 module.exports = {
   createKonsul,
   getKonsul,
-  getMasy,
+  getKonsulByNIK,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

@@ -49,10 +49,40 @@ const deleteAph = async (apphId) => {
   }
 };
 
+const getPenggunaByID = async (id_apph) => {
+  try {
+    const snapshot = await apphsRef.orderByChild('id_apph').equalTo(id_apph).once('value');
+    return snapshot.val();
+  } catch (error) {
+    throw error;
+  }
+};
+
+const loginApph = async (id_apph, password) => {
+  try {
+    const snapshot = await apphsRef.orderByChild('id_apph').equalTo(id_apph).once('value');
+    const apphData = snapshot.val();
+    
+    if (!apphData) {
+      throw new Error('Apph not found');
+    }
+    const apph = Object.values(apphData)[0];
+    if (apph.password !== password) {
+      throw new Error('Invalid password');
+    }
+
+    return apph;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addAph,
   getAphById,
   getAllAphs,
   updateAph,
-  deleteAph
+  deleteAph,
+  getPenggunaByID,
+  loginApph
 };

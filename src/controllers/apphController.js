@@ -59,10 +59,45 @@ const deleteAph = async (req, res, next) => {
   }
 };
 
+const getPenggunaByID = async (req, res, next) => {
+  try {
+    const { id_apph } = req.params;
+    if (!id_apph) {
+      return res.status(400).json({ message: 'id_apph parameter is required' });
+    }
+    const apphData = await apphModel.getPenggunaByID(id_apph);
+    if (!apphData) {
+      return res.status(404).json({ message: 'APPH not found' });
+    }
+    res.status(200).json(apphData);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const loginApph = async (req, res, next) => {
+  try {
+    const { id_apph, password } = req.body;
+    if (!id_apph || !password) {
+      return res.status(400).json({ message: 'id_apph and password are required' });
+    }
+    const apphData = await apphModel.loginApph(id_apph, password);
+    if (!apphData) {
+      return res.status(401).json({ message: 'Invalid id_apph or password' });
+    }
+    res.status(200).json({ message: 'Login successful', apphData });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   createAph,
   getAph,
   getAllAphs,
   updateAph,
-  deleteAph
+  deleteAph,
+  getPenggunaByID,
+  loginApph
 };

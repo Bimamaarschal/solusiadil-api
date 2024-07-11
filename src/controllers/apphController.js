@@ -2,11 +2,11 @@ const apphModel = require('../models/apphModel');
 
 const createAph = async (req, res, next) => {
     try {
-      const { id_apph, nik, alamat, pendidikan, pekerjaan, doc_pendukung, email, password } = req.body;
-      if ( !id_apph || !nik || !alamat || !pendidikan || !pekerjaan || !doc_pendukung || !email || !password ) {
+      const { id_apph, nik, nama_apph, alamat, pendidikan, pekerjaan, doc_pendukung, email, password, poin, jumlah_kontribusi, keterangan } = req.body;
+      if ( !id_apph || !nik || !nama_apph || !alamat || !pendidikan || !pekerjaan || !doc_pendukung || !email || !password || !poin || !jumlah_kontribusi || !keterangan) {
         return res.status(400).json({ message: 'Kesalahan Dalam Menyimpan Data' });
       }
-      const apphData = { id_apph, nik, alamat, pendidikan, pekerjaan, doc_pendukung, email, password };
+      const apphData = { id_apph, nik, nama_apph, alamat, pendidikan, pekerjaan, doc_pendukung, email, password, poin, jumlah_kontribusi, keterangan };
       const apphId = await apphModel.addAph(apphData);
       res.status(201).json({ message: 'Data Berhasil di Simpan - Server Solusi Adil', apphId });
     } catch (error) {

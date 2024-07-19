@@ -49,10 +49,22 @@ const deleteTulisan = async (blogId) => {
   }
 };
 
+const getTulisanByNik = async (id_blog) => {
+  try {
+    console.log("id_blog:", id_blog);
+    const snapshot = await blogsRef.orderByChild('id_blog').equalTo(id_blog).once('value');
+    return snapshot.val();
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 module.exports = {
   addTulisan,
   getTulisanById,
   getAllTulisans,
+  getTulisanByNik,
   updateTulisan,
   deleteTulisan
 };

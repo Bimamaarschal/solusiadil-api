@@ -59,10 +59,27 @@ const deleteTulisan = async (req, res, next) => {
   }
 };
 
+const getTulisanByNik = async (req, res, next) => {
+  try {
+    const { id_blog } = req.params;
+    if (!id_blog) {
+      return res.status(400).json({ message: 'id_blog parameter is required' });
+    }
+    const blogData = await blogModel.getTulisanByNik(id_blog);
+    if (!blogData) {
+      return res.status(404).json({ message: 'blogData not found' });
+    }
+    res.status(200).json(blogData);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createTulisan,
   getTulisan,
   getAllTulisans,
   updateTulisan,
+  getTulisanByNik,
   deleteTulisan
 };

@@ -58,6 +58,21 @@ const getPenggunaByNIK = async (id_masyarakat) => {
   }
 };
 
+const updatePenggunaByNIK = async (id_masyarakat, updatedData) => {
+  try {
+    const snapshot = await usersRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await usersRef.child(key).update(updatedData);
+      return { success: true, message: 'Data pengguna berhasil diperbarui' };
+    } else {
+      return { success: false, message: 'Data pengguna tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const loginPengguna = async (id_masyarakat, password) => {
   try {
     const snapshot = await usersRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
@@ -84,5 +99,6 @@ module.exports = {
   updatePengguna,
   deletePengguna,
   getPenggunaByNIK,
+  updatePenggunaByNIK,
   loginPengguna
 };

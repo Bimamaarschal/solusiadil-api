@@ -75,6 +75,21 @@ const getPenggunaByNIK = async (req, res, next) => {
   }
 };
 
+const updatePenggunaByNIK = async (req, res, next) => {
+  try {
+    const id_masyarakat = req.params.id_masyarakat;
+    const userData = req.body;
+    const result = await userModel.updatePenggunaByNIK(id_masyarakat, userData);
+    if (result.success) {
+      res.status(200).json({ message: 'Data Berhasil di Perbarui dan di Simpan - Server Solusi Adil', id_masyarakat });
+    } else {
+      res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 const loginPengguna = async (req, res, next) => {
   try {
     const { id_masyarakat, password } = req.body;
@@ -92,7 +107,6 @@ const loginPengguna = async (req, res, next) => {
 };
 
 
-
 module.exports = {
   createPengguna,
   getPengguna,
@@ -100,5 +114,6 @@ module.exports = {
   updatePengguna,
   deletePengguna,
   getPenggunaByNIK,
+  updatePenggunaByNIK,
   loginPengguna
 };

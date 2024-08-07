@@ -75,6 +75,22 @@ const getPenggunaByID = async (req, res, next) => {
   }
 };
 
+const updatePenggunaByID = async (req, res, next) => {
+  try {
+    const id_apph = req.params.id_apph;
+    const apphData = req.body;
+    const result = await apphModel.updatePenggunaByID(id_apph, apphData);
+
+    if (result.success) {
+      res.status(200).json({ message: 'Data Berhasil di Perbarui dan di Simpan - Server Solusi Adil', id_apph });
+    } else {
+      res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 const loginApph = async (req, res, next) => {
   try {
     const { id_apph, password } = req.body;
@@ -99,5 +115,6 @@ module.exports = {
   updateAph,
   deleteAph,
   getPenggunaByID,
+  updatePenggunaByID,
   loginApph
 };

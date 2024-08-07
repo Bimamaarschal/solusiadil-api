@@ -9,5 +9,6 @@ router.put('/:id', apphController.updateAph);
 router.delete('/:id', apphController.deleteAph);
 router.get('/idapph/:id_apph', apphController.getPenggunaByID);
 router.post('/login', apphController.loginApph);
+router.put('/idapph/:id_apph', apphController.updatePenggunaByID);
 
 module.exports = router;

@@ -58,6 +58,21 @@ const getPenggunaByID = async (id_apph) => {
   }
 };
 
+const updatePenggunaByID = async (id_apph, updatedData) => {
+  try {
+    const snapshot = await apphsRef.orderByChild('id_apph').equalTo(id_apph).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await apphsRef.child(key).update(updatedData);
+      return { success: true, message: 'Data pengguna berhasil diperbarui' };
+    } else {
+      return { success: false, message: 'Data pengguna tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const loginApph = async (id_apph, password) => {
   try {
     const snapshot = await apphsRef.orderByChild('id_apph').equalTo(id_apph).once('value');
@@ -84,5 +99,6 @@ module.exports = {
   updateAph,
   deleteAph,
   getPenggunaByID,
+  updatePenggunaByID,
   loginApph
 };

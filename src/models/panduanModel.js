@@ -49,10 +49,52 @@ const deletePH = async (panduanId) => {
   }
 };
 
+const getPanduanByID = async (id_panduan) => {
+  try {
+    const snapshot = await panduansRef.orderByChild('id_panduan').equalTo(id_panduan).once('value');
+    return snapshot.val();
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updatePanduanByID = async (id_panduan, updatedData) => {
+  try {
+    const snapshot = await panduansRef.orderByChild('id_panduan').equalTo(id_panduan).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await panduansRef.child(key).update(updatedData);
+      return { success: true, message: 'Data panduan berhasil diperbarui' };
+    } else {
+      return { success: false, message: 'Data panduan tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deletePanduanByID = async (id_panduan) => {
+  try {
+    const snapshot = await panduansRef.orderByChild('id_panduan').equalTo(id_panduan).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await panduansRef.child(key).remove();
+      return { success: true, message: 'Data panduan berhasil dihapus' };
+    } else {
+      return { success: false, message: 'Data panduan tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addPH,
   getPHById,
   getAllPHs,
   updatePH,
+  getPanduanByID,
+  updatePanduanByID,
+  deletePanduanByID,
   deletePH
 };

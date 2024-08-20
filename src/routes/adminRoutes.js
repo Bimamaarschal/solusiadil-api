@@ -9,7 +9,7 @@ router.put('/:id', adminController.updateAdmin);
 router.delete('/:id', adminController.deleteAdmin);
 router.get('/idadmin/:id_apph', adminController.getPenggunaByID);
 router.put('/idadmin/:id_apph', adminController.updatePenggunaByID);
-router.post('/login', adminController.loginApph);
+router.post('/login', adminController.loginAdmin);
 
 
 module.exports = router;

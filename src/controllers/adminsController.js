@@ -97,7 +97,7 @@ const loginAdmins = async (req, res, next) => {
     if (!id_apph || !password) {
       return res.status(400).json({ message: 'id_apph and password are required' });
     }
-    const adminsData = await adminsModel.loginadmins(id_apph, password);
+    const adminsData = await adminsModel.loginAdmins(id_apph, password);
     if (!adminsData) {
       return res.status(401).json({ message: 'Invalid id_apph or password' });
     }

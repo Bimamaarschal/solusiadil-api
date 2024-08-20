@@ -106,6 +106,21 @@ const loginPengguna = async (req, res, next) => {
   }
 };
 
+const deletePenggunaByID = async (req, res, next) => {
+  try {
+    const id_masyarakat = req.params.id_masyarakat;
+    const result = await userModel.deletePenggunaByID(id_masyarakat);
+
+    if (result.success) {
+      res.status(200).json({ message: 'Data Berhasil di Hapus - Server Solusi Adil', id_masyarakat });
+    } else {
+      res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 module.exports = {
   createPengguna,
@@ -115,5 +130,6 @@ module.exports = {
   deletePengguna,
   getPenggunaByNIK,
   updatePenggunaByNIK,
+  deletePenggunaByID,
   loginPengguna
 };

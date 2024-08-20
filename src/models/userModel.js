@@ -92,6 +92,22 @@ const loginPengguna = async (id_masyarakat, password) => {
   }
 };
 
+
+const deletePenggunaByID = async (id_masyarakat) => {
+  try {
+    const snapshot = await usersRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await usersRef.child(key).remove();
+      return { success: true, message: 'Data apph berhasil dihapus' };
+    } else {
+      return { success: false, message: 'Data apph tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addPengguna,
   getPenggunaById,
@@ -100,5 +116,6 @@ module.exports = {
   deletePengguna,
   getPenggunaByNIK,
   updatePenggunaByNIK,
+  deletePenggunaByID,
   loginPengguna
 };

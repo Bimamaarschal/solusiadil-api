@@ -49,18 +49,18 @@ const deleteAdmins = async (adminsId) => {
   }
 };
 
-const getPenggunaByID = async (id_admins) => {
+const getPenggunaByID = async (id_apph) => {
   try {
-    const snapshot = await adminssRef.orderByChild('id_admins').equalTo(id_admins).once('value');
+    const snapshot = await adminssRef.orderByChild('id_apph').equalTo(id_apph).once('value');
     return snapshot.val();
   } catch (error) {
     throw error;
   }
 };
 
-const updatePenggunaByID = async (id_admins, updatedData) => {
+const updatePenggunaByID = async (id_apph, updatedData) => {
   try {
-    const snapshot = await adminssRef.orderByChild('id_admins').equalTo(id_admins).once('value');
+    const snapshot = await adminssRef.orderByChild('id_apph').equalTo(id_apph).once('value');
     if (snapshot.exists()) {
       const key = Object.keys(snapshot.val())[0];
       await adminssRef.child(key).update(updatedData);
@@ -73,9 +73,9 @@ const updatePenggunaByID = async (id_admins, updatedData) => {
   }
 };
 
-const loginAdmins = async (id_admins, password) => {
+const loginAdmins = async (id_apph, password) => {
   try {
-    const snapshot = await adminssRef.orderByChild('id_admins').equalTo(id_admins).once('value');
+    const snapshot = await adminssRef.orderByChild('id_apph').equalTo(id_apph).once('value');
     const adminsData = snapshot.val();
     
     if (!adminsData) {

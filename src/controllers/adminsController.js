@@ -2,11 +2,11 @@ const adminsModel = require('../models/adminsModel');
 
 const createAdmins = async (req, res, next) => {
     try {
-      const { id_admins, nik, nama_admins, alamat, pendidikan, pekerjaan, doc_pendukung, email, password, poin, jumlah_kontribusi, keterangan } = req.body;
-      if ( !id_admins || !nik || !nama_admins || !alamat || !pendidikan || !pekerjaan || !doc_pendukung || !email || !password || !poin || !jumlah_kontribusi || !keterangan) {
+      const { id_apph, nik, nama_admins, alamat, pendidikan, pekerjaan, doc_pendukung, email, password, poin, jumlah_kontribusi, keterangan } = req.body;
+      if ( !id_apph || !nik || !nama_admins || !alamat || !pendidikan || !pekerjaan || !doc_pendukung || !email || !password || !poin || !jumlah_kontribusi || !keterangan) {
         return res.status(400).json({ message: 'Kesalahan Dalam Menyimpan Data' });
       }
-      const adminsData = { id_admins, nik, nama_admins, alamat, pendidikan, pekerjaan, doc_pendukung, email, password, poin, jumlah_kontribusi, keterangan };
+      const adminsData = { id_apph, nik, nama_admins, alamat, pendidikan, pekerjaan, doc_pendukung, email, password, poin, jumlah_kontribusi, keterangan };
       const adminsId = await adminsModel.addAdmins(adminsData);
       res.status(201).json({ message: 'Data Berhasil di Simpan - Server Solusi Adil', adminsId });
     } catch (error) {
@@ -61,11 +61,11 @@ const deleteAdmins = async (req, res, next) => {
 
 const getPenggunaByID = async (req, res, next) => {
   try {
-    const { id_admins } = req.params;
-    if (!id_admins) {
-      return res.status(400).json({ message: 'id_admins parameter is required' });
+    const { id_apph } = req.params;
+    if (!id_apph) {
+      return res.status(400).json({ message: 'id_apph parameter is required' });
     }
-    const adminsData = await adminsModel.getPenggunaByID(id_admins);
+    const adminsData = await adminsModel.getPenggunaByID(id_apph);
     if (!adminsData) {
       return res.status(404).json({ message: 'admins not found' });
     }
@@ -77,12 +77,12 @@ const getPenggunaByID = async (req, res, next) => {
 
 const updatePenggunaByID = async (req, res, next) => {
   try {
-    const id_admins = req.params.id_admins;
+    const id_apph = req.params.id_apph;
     const adminsData = req.body;
-    const result = await adminsModel.updatePenggunaByID(id_admins, adminsData);
+    const result = await adminsModel.updatePenggunaByID(id_apph, adminsData);
 
     if (result.success) {
-      res.status(200).json({ message: 'Data Berhasil di Perbarui dan di Simpan - Server Solusi Adil', id_admins });
+      res.status(200).json({ message: 'Data Berhasil di Perbarui dan di Simpan - Server Solusi Adil', id_apph });
     } else {
       res.status(404).json({ message: result.message });
     }
@@ -93,13 +93,13 @@ const updatePenggunaByID = async (req, res, next) => {
 
 const loginAdmins = async (req, res, next) => {
   try {
-    const { id_admins, password } = req.body;
-    if (!id_admins || !password) {
-      return res.status(400).json({ message: 'id_admins and password are required' });
+    const { id_apph, password } = req.body;
+    if (!id_apph || !password) {
+      return res.status(400).json({ message: 'id_apph and password are required' });
     }
-    const adminsData = await adminsModel.loginadmins(id_admins, password);
+    const adminsData = await adminsModel.loginadmins(id_apph, password);
     if (!adminsData) {
-      return res.status(401).json({ message: 'Invalid id_admins or password' });
+      return res.status(401).json({ message: 'Invalid id_apph or password' });
     }
     res.status(200).json({ message: 'Login successful', adminsData });
   } catch (error) {

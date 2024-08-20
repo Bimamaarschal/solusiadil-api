@@ -92,6 +92,21 @@ const loginApph = async (id_apph, password) => {
   }
 };
 
+const deleteApphByID = async (id_apph) => {
+  try {
+    const snapshot = await apphsRef.orderByChild('id_apph').equalTo(id_apph).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await apphsRef.child(key).remove();
+      return { success: true, message: 'Data apph berhasil dihapus' };
+    } else {
+      return { success: false, message: 'Data apph tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addAph,
   getAphById,
@@ -100,5 +115,6 @@ module.exports = {
   deleteAph,
   getPenggunaByID,
   updatePenggunaByID,
+  deleteApphByID,
   loginApph
 };

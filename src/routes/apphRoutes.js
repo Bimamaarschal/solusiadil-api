@@ -10,6 +10,7 @@ router.delete('/:id', apphController.deleteAph);
 router.get('/idapph/:id_apph', apphController.getPenggunaByID);
 router.put('/idapph/:id_apph', apphController.updatePenggunaByID);
 router.post('/login', apphController.loginApph);
+router.delete('/idapph/:id_apph', apphController.deleteApphByID);
 
 
 module.exports = router;

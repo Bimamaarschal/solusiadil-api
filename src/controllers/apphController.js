@@ -107,6 +107,21 @@ const loginApph = async (req, res, next) => {
   }
 };
 
+const deleteApphByID = async (req, res, next) => {
+  try {
+    const id_apph = req.params.id_apph;
+    const result = await apphModel.deleteApphByID(id_apph);
+
+    if (result.success) {
+      res.status(200).json({ message: 'Data Berhasil di Hapus - Server Solusi Adil', id_apph });
+    } else {
+      res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 module.exports = {
   createAph,
@@ -116,5 +131,6 @@ module.exports = {
   deleteAph,
   getPenggunaByID,
   updatePenggunaByID,
+  deleteApphByID,
   loginApph
 };

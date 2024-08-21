@@ -2,11 +2,11 @@ const konsultasiModel = require('../models/konsultasiModel');
 
 const createKonsul = async (req, res, next) => {
     try {
-      const { id_konsultasi, tanggal, id_masyarakat, nama_mast, id_apph, nama_apph, judul, pertanyaan, jawaban, keterangan, undangundang, status, lanjutan1, wilayahhukum, referensi, media } = req.body;
-      if ( !id_konsultasi || !tanggal || !id_masyarakat || !nama_mast || !id_apph || !nama_apph || !judul || !pertanyaan || !jawaban || !keterangan || !undangundang || !status || !lanjutan1 || !wilayahhukum || !referensi || !media ) {
+      const { id_konsultasi, tanggal, id_masyarakat, nama_mast, id_apph, nama_apph, calendly, judul, pertanyaan, jawaban, keterangan, undangundang, status, lanjutan1, wilayahhukum, referensi, media } = req.body;
+      if ( !id_konsultasi || !tanggal || !id_masyarakat || !nama_mast || !id_apph || !nama_apph || !calendly || !judul || !pertanyaan || !jawaban || !keterangan || !undangundang || !status || !lanjutan1 || !wilayahhukum || !referensi || !media ) {
         return res.status(400).json({ message: 'Kesalahan Dalam Menyimpan Data' });
       }
-      const konsultasiData = { id_konsultasi, tanggal, id_masyarakat, nama_mast, id_apph, nama_apph, judul, pertanyaan, jawaban, keterangan, undangundang, status, lanjutan1, wilayahhukum, referensi, media };
+      const konsultasiData = { id_konsultasi, tanggal, id_masyarakat, nama_mast, id_apph, nama_apph, calendly, judul, pertanyaan, jawaban, keterangan, undangundang, status, lanjutan1, wilayahhukum, referensi, media };
       const konsultasiId = await konsultasiModel.addKonsul(konsultasiData);
       res.status(201).json({ message: 'Data Berhasil di Simpan - Server Solusi Adil', konsultasiId });
     } catch (error) {

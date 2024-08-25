@@ -7,6 +7,8 @@ router.get('/:id', blogController.getTulisan);
 router.get('/', blogController.getAllTulisans);
 router.put('/:id', blogController.updateTulisan);
 router.delete('/:id', blogController.deleteTulisan);
-router.get('/idblog/:id_blog', blogController.getTulisanByNik);
+router.get('/idblog/:id_blog', blogController.getTulisanByID);
+router.put('/idblog/:id_blog', blogController.updateTulisanByID);
+router.delete('/idblog/:id_blog', blogController.deleteTulisanByID);
 
 module.exports = router;

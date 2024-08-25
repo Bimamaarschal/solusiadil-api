@@ -59,13 +59,13 @@ const deleteTulisan = async (req, res, next) => {
   }
 };
 
-const getTulisanByNik = async (req, res, next) => {
+const getTulisanByID = async (req, res, next) => {
   try {
     const { id_blog } = req.params;
     if (!id_blog) {
       return res.status(400).json({ message: 'id_blog parameter is required' });
     }
-    const blogData = await blogModel.getTulisanByNik(id_blog);
+    const blogData = await blogModel.getTulisanByID(id_blog);
     if (!blogData) {
       return res.status(404).json({ message: 'blogData not found' });
     }
@@ -75,11 +75,45 @@ const getTulisanByNik = async (req, res, next) => {
   }
 };
 
+const updateTulisanByID = async (req, res, next) => {
+  try {
+    const id_blog = req.params.id_blog;
+    const blogData = req.body;
+    const result = await blogModel.updateTulisanByID(id_blog, blogData);
+
+    if (result.success) {
+      res.status(200).json({ message: 'Data Berhasil di Perbarui dan di Simpan - Server Solusi Adil', id_blog });
+    } else {
+      res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteTulisanByID = async (req, res, next) => {
+  try {
+    const id_blog = req.params.id_blog;
+    const result = await blogModel.deleteTulisanByID(id_blog);
+
+    if (result.success) {
+      res.status(200).json({ message: 'Data Berhasil di Hapus - Server Solusi Adil', id_blog });
+    } else {
+      res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   createTulisan,
   getTulisan,
   getAllTulisans,
   updateTulisan,
-  getTulisanByNik,
+  getTulisanByID,
+  updateTulisanByID,
+  deleteTulisanByID,
   deleteTulisan
 };

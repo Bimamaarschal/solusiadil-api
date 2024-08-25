@@ -49,7 +49,7 @@ const deleteTulisan = async (blogId) => {
   }
 };
 
-const getTulisanByNik = async (id_blog) => {
+const getTulisanByID = async (id_blog) => {
   try {
     console.log("id_blog:", id_blog);
     const snapshot = await blogsRef.orderByChild('id_blog').equalTo(id_blog).once('value');
@@ -59,12 +59,45 @@ const getTulisanByNik = async (id_blog) => {
   }
 };
 
+const updateTulisanByID = async (id_blog, updatedData) => {
+  try {
+    const snapshot = await blogsRef.orderByChild('id_blog').equalTo(id_blog).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await blogsRef.child(key).update(updatedData);
+      return { success: true, message: 'Data Blog berhasil diperbarui' };
+    } else {
+      return { success: false, message: 'Data Blog tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteTulisanByID = async (id_blog) => {
+  try {
+    const snapshot = await blogsRef.orderByChild('id_blog').equalTo(id_blog).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await blogsRef.child(key).remove();
+      return { success: true, message: 'Data Blog berhasil dihapus' };
+    } else {
+      return { success: false, message: 'Data Blog tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 module.exports = {
   addTulisan,
   getTulisanById,
   getAllTulisans,
-  getTulisanByNik,
+  getTulisanByID,
+  updateTulisanByID,
+  deleteTulisanByID,
   updateTulisan,
   deleteTulisan
 };

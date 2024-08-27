@@ -9,6 +9,7 @@ const konsultasiRoutes = require('./src/routes/konsultasiRoutes');
 const beritaRoutes = require('./src/routes/beritaRoutes');
 const apphRoutes = require('./src/routes/apphRoutes');
 const adminRoutes = require('./src/routes/adminRoutes');
+const sertifikatRoutes = require('./src/routes/sertifikatRoutes');
 const app = express();
 
 app.use(cors());
@@ -23,6 +24,7 @@ app.use('/konsultasi', konsultasiRoutes);
 app.use('/berita', beritaRoutes);
 app.use('/apph', apphRoutes);
 app.use('/admin', adminRoutes);
+app.use('/sertifikat', sertifikatRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -8,6 +8,7 @@ router.get('/', sertifikatController.getAllSertifikats);
 router.put('/:id', sertifikatController.updateSertifikat);
 router.delete('/:id', sertifikatController.deleteSertifikat);
 router.get('/idsertifikat/:id_sertifikat', sertifikatController.getSertifikatByID);
+router.get('/idapph/:id_apph', sertifikatController.getSertifikatByIDAPPH);
 router.put('/idsertifikat/:id_sertifikat', sertifikatController.updateSertifikatByID);
 router.delete('/idsertifikat/:id_sertifikat', sertifikatController.deleteSertifikatByID);
 

@@ -88,12 +88,22 @@ const deleteSertifikatByID = async (id_sertifikat) => {
   }
 };
 
+const getSertifikatByIDAPPH = async (id_apph) => {
+  try {
+    const snapshot = await sertifikatsRef.orderByChild('id_apph').equalTo(id_apph).once('value');
+    return snapshot.val();
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addSertifikat,
   getSertifikatById,
   getAllSertifikats,
   updateSertifikat,
   getSertifikatByID,
+  getSertifikatByIDAPPH,
   updateSertifikatByID,
   deleteSertifikatByID,
   deleteSertifikat

@@ -105,12 +105,29 @@ const deleteSertifikatByID = async (req, res, next) => {
   }
 };
 
+const getSertifikatByIDAPPH = async (req, res, next) => {
+  try {
+    const { id_apph } = req.params;
+    if (!id_apph) {
+      return res.status(400).json({ message: 'id_apph parameter is required' });
+    }
+    const sertifikatData = await sertifikatModel.getSertifikatByIDAPPH(id_apph);
+    if (!sertifikatData) {
+      return res.status(404).json({ message: 'sertifikat not found' });
+    }
+    res.status(200).json(sertifikatData);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createSertifikat,
   getSertifikat,
   getAllSertifikats,
   updateSertifikat,
   getSertifikatByID,
+  getSertifikatByIDAPPH,
   updateSertifikatByID,
   deleteSertifikatByID,
   deleteSertifikat

@@ -9,5 +9,6 @@ router.put('/:id', konsultasiController.updateKonsul);
 router.delete('/:id', konsultasiController.deleteKonsul);
 router.get('/idmasyarakat/:id_masyarakat', konsultasiController.getKonsulByNIK);
 router.get('/idkonsultasi/:id_konsultasi', konsultasiController.getKonsulByIDK);
+router.delete('/idkonsultasi/:id_konsultasi', konsultasiController.deleteKonsulByIDK);
 
 module.exports = router;

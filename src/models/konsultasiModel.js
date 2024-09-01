@@ -69,11 +69,27 @@ const getKonsulByIDK = async (id_konsultasi) => {
   }
 };
 
+const deleteKonsulByIDK = async (id_konsultasi) => {
+  try {
+    const snapshot = await konsultasisRef.orderByChild('id_konsultasi').equalTo(id_konsultasi).once('value');
+    if (snapshot.exists()) {
+      const key = Object.keys(snapshot.val())[0];
+      await konsultasisRef.child(key).remove();
+      return { success: true, message: 'Data konsultasi berhasil dihapus' };
+    } else {
+      return { success: false, message: 'Data konsultasi tidak ditemukan' };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addKonsul,
   getKonsulById,
   getKonsulByNIK,
   getKonsulByIDK,
+  deleteKonsulByIDK,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

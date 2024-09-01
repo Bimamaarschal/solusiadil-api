@@ -91,12 +91,29 @@ const getKonsulByIDK = async (req, res, next) => {
   }
 };
 
+const deleteKonsulByIDK = async (req, res, next) => {
+  try {
+    const id_konsultasi = req.params.id_konsultasi;
+    const result = await konsultasiModel.deleteKonsulByIDK(id_konsultasi);
+
+    if (result.success) {
+      res.status(200).json({ message: 'Data Berhasil di Hapus - Server Solusi Adil', id_konsultasi });
+    } else {
+      res.status(404).json({ message: result.message });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 
 module.exports = {
   createKonsul,
   getKonsul,
   getKonsulByNIK,
   getKonsulByIDK,
+  deleteKonsulByIDK,
   getAllKonsuls,
   updateKonsul,
   deleteKonsul

@@ -73,9 +73,9 @@ const updatePenggunaByNIK = async (id_masyarakat, updatedData) => {
   }
 };
 
-const loginPengguna = async (id_masyarakat, password) => {
+const loginPengguna = async (nik, password) => {
   try {
-    const snapshot = await usersRef.orderByChild('id_masyarakat').equalTo(id_masyarakat).once('value');
+    const snapshot = await usersRef.orderByChild('nik').equalTo(nik).once('value');
     const userData = snapshot.val();
     
     if (!userData) {
